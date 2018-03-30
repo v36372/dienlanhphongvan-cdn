@@ -1,0 +1,35 @@
+# webservice
+# override:
+#    port : --port PORT_NUMBER
+#    host : --host IP_ADDRESS
+#    debug: --debug 
+web:
+  host:  0.0.0.0
+  port:  8921
+  debug: true
+
+# log
+log:
+  dir        : /home/justin/workspace/src/dienlanhphongvan-cdn/log
+  enableDebug: false
+
+# resource, no used
+resource:
+  rootDir: ""
+
+# storate service: serve original images
+storage:
+  address: ""
+
+# pot service: serve original images, cached images. It will download original images from storage 
+pot:
+  address: ""
+
+# slave service: serve original images, cached images. It will download original and cached images from pot service.
+slave:
+  address: ""
+
+# imgx service: image processing service
+imgx:  
+  address: ""
+

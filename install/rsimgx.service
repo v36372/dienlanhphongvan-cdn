@@ -1,0 +1,25 @@
+# Install
+# - sudo cp install/rsimgx.service /usr/lib/systemd/system/rsimgx.service
+# - sudo chmod 664 /usr/lib/systemd/system/rsimgx.service
+# - sudo systemctl daemon-reload
+# - sudo systemctl start rsimgx.service
+# - sudo systemctl status rsimgx.service
+
+[Unit]
+Description=rsimgx - compress, crop, resize images.
+After=syslog.target network.target
+
+[Service]
+PIDFile=/run/rsimgx.pid
+User=sysadmin
+Group=sysadmin
+WorkingDirectory=/home/sysadmin/go/src/cdn/imgx
+ExecStartPre=/bin/mkdir -p /home/sysadmin/go/src/cdn/imgx/log
+ExecStartPre=/bin/touch /home/sysadmin/go/src/cdn/imgx/log/access.log
+ExecStart=/bin/sh -c "/home/sysadmin/go/src/cdn/imgx/bin/rsimgx >> /home/sysadmin/go/src/cdn/imgx/log/access.log 2>&1"
+ExecStop=/bin/kill -s QUIT $MAINPID
+Restart=always
+RestartSec=1
+
+[Install]
+WantedBy=multi-user.target
